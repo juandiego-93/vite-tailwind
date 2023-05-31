@@ -6,6 +6,10 @@ const Context = React.createContext()
 function ContextProvider({ children }) {
 
     const [count, setCount] = React.useState(0)
+    const [isProductDetailOpen, setIsProductDetailOpen] = React.useState(false)
+
+    function openProductDetail() {setIsProductDetailOpen(true)}
+    function closeProductDetail() {setIsProductDetailOpen(false)}
 
     console.log('COUNT: '+ count)
 
@@ -13,6 +17,10 @@ function ContextProvider({ children }) {
         <Context.Provider value={{
             count,
             setCount,
+            openProductDetail,
+            closeProductDetail,
+            isProductDetailOpen,
+
         }}>
             {children}
         </Context.Provider>
