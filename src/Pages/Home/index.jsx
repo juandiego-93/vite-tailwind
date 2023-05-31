@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Layout from '../../Components/Layout'
 import Card from '../../Components/Card'
 
@@ -7,13 +7,21 @@ function Home() {
 
     React.useEffect(() => {
         fetch('https://api.escuelajs.co/api/v1/products')
-            .then(response => console.log(response.json()))
+            .then(response => response.json())
+            .then(data => setItems(data),)
+            
     }, [])
 
     return (
         <Layout>
             Home
-            <Card/>
+            <div className='grid gap-5 grid-cols-4 w-full max-w-screen-lg'>
+                {
+                    items?.map((item) => (
+                        <Card key={item.id} data={item} />
+                    ))
+                }
+            </div>
         </Layout>
 
     )
