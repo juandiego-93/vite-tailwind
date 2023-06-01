@@ -5,11 +5,18 @@ const Context = React.createContext()
 
 function ContextProvider({ children }) {
 
+    // ShoppingCart Increment quantity
     const [count, setCount] = React.useState(0)
+    
+    // Product Detail - Open Close 
     const [isProductDetailOpen, setIsProductDetailOpen] = React.useState(false)
 
     function openProductDetail() {setIsProductDetailOpen(true)}
     function closeProductDetail() {setIsProductDetailOpen(false)}
+
+    // Product Detail - Show product
+    const [productShow, setProductShow] = React.useState({})
+
 
     console.log('COUNT: '+ count)
 
@@ -20,6 +27,8 @@ function ContextProvider({ children }) {
             openProductDetail,
             closeProductDetail,
             isProductDetailOpen,
+            productShow,
+            setProductShow,
 
         }}>
             {children}
