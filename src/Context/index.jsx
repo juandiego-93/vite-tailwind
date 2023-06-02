@@ -17,6 +17,9 @@ function ContextProvider({ children }) {
     // Product Detail - Show product
     const [productShow, setProductShow] = React.useState({})
 
+    // ShoppingCart - Add products to Cart
+    const [cartProducts, setCartProducts] = React.useState([])
+
 
     console.log('COUNT: '+ count)
 
@@ -29,6 +32,8 @@ function ContextProvider({ children }) {
             isProductDetailOpen,
             productShow,
             setProductShow,
+            cartProducts,
+            setCartProducts,
 
         }}>
             {children}
