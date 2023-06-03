@@ -29,6 +29,19 @@ function ContextProvider({ children }) {
     // ShoppingCart - Add products to Cart
     const [order, setOrder] = React.useState([])
 
+    //Get products
+    const[items, setItems] = React.useState(null) 
+
+    // Get products by title
+    const[searchByTitle, setSearchByTitle] = React.useState(null) 
+
+    React.useEffect(() => {
+        fetch('https://api.escuelajs.co/api/v1/products')
+            .then(response => response.json())
+            .then(data => setItems(data),)
+            
+    }, [])
+
     console.log('COUNT: '+ count)
 
     return (
@@ -47,6 +60,10 @@ function ContextProvider({ children }) {
             isCheckoutSideMenuOpen,
             order,
             setOrder,
+            items,
+            setItems,
+            searchByTitle,
+            setSearchByTitle
 
         }}>
             {children}

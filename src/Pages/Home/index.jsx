@@ -1,24 +1,25 @@
 import React from 'react'
+import { Context } from '../../Context'
 import Layout from '../../Components/Layout'
 import Card from '../../Components/Card'
 import ProductDetail from '../../Components/ProductDetail'
 
 function Home() {
-    const[items, setItems] = React.useState(null) 
-
-    React.useEffect(() => {
-        fetch('https://api.escuelajs.co/api/v1/products')
-            .then(response => response.json())
-            .then(data => setItems(data),)
-            
-    }, [])
-
+const context = React.useContext(Context)
+console.log('Search by title: ', context.searchByTitle)
     return (
         <Layout>
-            Home
+            <div className='flex items-center justify-center  relative w-80 mb-6'>
+                <h1 className='font-medium text-xl'>Exclusive Products</h1>
+            </div>
+            <input 
+                className='rounded-lg border border-black w-80 p-4 mb-6 focus:outline-blue-700' 
+                type="text" 
+                placeholder='Search a product'
+                onChange={(event) => context?.setSearchByTitle(event.target.value) } />
             <div className='grid gap-5 grid-cols-4 w-full max-w-screen-lg'>
                 {
-                    items?.map((item) => (
+                    context.items?.map((item) => (
                         <Card key={item.id} data={item} />
                     ))
                 }
