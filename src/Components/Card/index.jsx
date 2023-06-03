@@ -17,7 +17,6 @@ function Card(data) {
         context?.setCount(context.count + 1)
         context?.openCheckoutSideMenu()
         context?.closeProductDetail()
-        console.log('CART: ', context.cartProducts)
     }
 
     return (

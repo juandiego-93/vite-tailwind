@@ -2,11 +2,14 @@ import React from 'react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { Context } from '../../Context'
 import './styles.css'
+import OrderCard from '../OrderCard'
 
 
 
 function CheckoutSideMenu() {
     const context = React.useContext(Context)
+    console.log('CART: ', context.cartProducts)
+
 
     return (
         <aside className={`${context?.isCheckoutSideMenuOpen ? 'flex' : 'hidden'} check-out-side-menu flex-col fixed right-0 border border-black rounded-lg bg-white`}>
@@ -18,6 +21,18 @@ function CheckoutSideMenu() {
                         onClick={() => { context?.closeCheckoutSideMenu() }}
                     />
                 </div>
+            </div>
+            <div className='px-6'>
+                {
+                    context.cartProducts.map((product) => (
+                        <OrderCard
+                            key={product.id}
+                            title={product.title}
+                            imgUrl={product.images}
+                            price={product.price}
+                        />
+                    ))
+                }
             </div>
         </aside>
     )
