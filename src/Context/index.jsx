@@ -30,10 +30,11 @@ function ContextProvider({ children }) {
     const [order, setOrder] = React.useState([])
 
     //Get products
-    const[items, setItems] = React.useState(null) 
+    const[items, setItems] = React.useState(null)
+    const[filteredItems, setFilteredItems] = React.useState(null) 
 
     // Get products by title
-    const[searchByTitle, setSearchByTitle] = React.useState(null) 
+    const[SearchByTitle, setSearchByTitle] = React.useState(null) 
 
     React.useEffect(() => {
         fetch('https://api.escuelajs.co/api/v1/products')
@@ -42,7 +43,13 @@ function ContextProvider({ children }) {
             
     }, [])
 
-    console.log('COUNT: '+ count)
+    function filteredItemsByTitle(items, searchByTitle) {
+        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    }
+
+    React.useEffect(() => { 
+        if (SearchByTitle) setFilteredItems(filteredItemsByTitle(items, SearchByTitle))
+    }, [items, SearchByTitle])
 
     return (
         <Context.Provider value={{
@@ -62,8 +69,9 @@ function ContextProvider({ children }) {
             setOrder,
             items,
             setItems,
-            searchByTitle,
-            setSearchByTitle
+            SearchByTitle,
+            setSearchByTitle,
+            filteredItems,
 
         }}>
             {children}

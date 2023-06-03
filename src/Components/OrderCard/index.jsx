@@ -8,7 +8,10 @@ function OrderCard(props) {
         renderXMarkIcon = <XMarkIcon
         className={`h-6 w-6 text-black-500 cursor-pointer bg-gray-100 rounded-full p-1`}
         onClick={()=> handleDelete(id)}
+
     />
+    OrderCard.propTypes = {handleDelete: PropTypes.node.isRequired
+    }
     }
 
     return (
@@ -32,7 +35,6 @@ OrderCard.propTypes = {
     title: PropTypes.node.isRequired,
     imgUrl: PropTypes.node.isRequired,
     price: PropTypes.node.isRequired,
-    handleDelete: PropTypes.node.isRequired
   };
 
 export default OrderCard
