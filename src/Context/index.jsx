@@ -14,6 +14,12 @@ function ContextProvider({ children }) {
     function openProductDetail() {setIsProductDetailOpen(true)}
     function closeProductDetail() {setIsProductDetailOpen(false)}
 
+    // Checkout Side Menu - Open Close 
+    const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = React.useState(false)
+
+    function openCheckoutSideMenu() {setIsCheckoutSideMenuOpen(true)}
+    function closeCheckoutSideMenu() {setIsCheckoutSideMenuOpen(false)}    
+
     // Product Detail - Show product
     const [productShow, setProductShow] = React.useState({})
 
@@ -34,6 +40,9 @@ function ContextProvider({ children }) {
             setProductShow,
             cartProducts,
             setCartProducts,
+            openCheckoutSideMenu,
+            closeCheckoutSideMenu,
+            isCheckoutSideMenuOpen,
 
         }}>
             {children}
