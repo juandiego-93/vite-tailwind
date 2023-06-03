@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
 function OrderCard(props) {
-    const { title, imgUrl, price } = props 
+    const { id, title, imgUrl, price, handleDelete } = props 
 
     return (
         <div className='flex justify-between items-center mb-3'>
@@ -16,6 +16,7 @@ function OrderCard(props) {
                 <p className='text-lg font-medium'>{price}</p>
                 <XMarkIcon
                         className={`h-6 w-6 text-black-500 cursor-pointer bg-gray-100 rounded-full p-1`}
+                        onClick={()=> handleDelete(id)}
                     />
             </div>
         </div>
@@ -23,9 +24,11 @@ function OrderCard(props) {
 }
 
 OrderCard.propTypes = {
+    id: PropTypes.node.isRequired,
     title: PropTypes.node.isRequired,
     imgUrl: PropTypes.node.isRequired,
     price: PropTypes.node.isRequired,
+    handleDelete: PropTypes.node.isRequired
   };
 
 export default OrderCard
