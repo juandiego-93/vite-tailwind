@@ -16,8 +16,9 @@ function AppRoutes() {
     { path:'/my-account', element: <MyAccount />},
     { path:'/my-order', element: <MyOrder />},
     { path:'/my-orders', element: <MyOrders />},
-    { path:'/*', element: <NotFound />},
+    { path:'/my-orders/last', element: <MyOrder />},
     { path:'/sign-in', element: <SignIn />},
+    { path:'/*', element: <NotFound />},
   ])
 
   return routes
