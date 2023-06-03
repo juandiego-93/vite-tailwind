@@ -8,9 +8,7 @@ import OrderCard from '../OrderCard'
 
 function CheckoutSideMenu() {
     const context = React.useContext(Context)
-    console.log('CART: ', context.cartProducts)
-
-
+    
     return (
         <aside className={`${context?.isCheckoutSideMenuOpen ? 'flex' : 'hidden'} check-out-side-menu flex-col fixed right-0 border border-black rounded-lg bg-white`}>
             <div className='flex justify-between items-center p-6'>
@@ -22,13 +20,13 @@ function CheckoutSideMenu() {
                     />
                 </div>
             </div>
-            <div className='px-6'>
+            <div className='px-6 overflow-y-scroll'>
                 {
                     context.cartProducts.map((product) => (
                         <OrderCard
                             key={product.id}
                             title={product.title}
-                            imgUrl={product.images}
+                            imgUrl={product.images[0]}
                             price={product.price}
                         />
                     ))
