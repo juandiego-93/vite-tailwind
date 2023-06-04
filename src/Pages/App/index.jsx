@@ -28,12 +28,12 @@ function AppRoutes() {
   const isUserSignout = context.signout || parsedSignout
 
   let routes = useRoutes([
-    { path:'/', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'sign-in'}/>},
-    { path:'/clothes', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'sign-in'}/>},
-    { path:'/electronics', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'sign-in'}/>},
-    { path:'/furnitures', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'sign-in'}/>},
-    { path:'/toys', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'sign-in'}/>},
-    { path:'/others', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'sign-in'}/>},
+    { path:'/', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'/sign-in'}/>},
+    { path:'/clothes', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'/sign-in'}/>},
+    { path:'/electronics', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'/sign-in'}/>},
+    { path:'/furnitures', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'/sign-in'}/>},
+    { path:'/toys', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'/sign-in'}/>},
+    { path:'/others', element: hasUserAnAccount&&!isUserSignout?<Home />:<Navigate replace to={'/sign-in'}/>},
     { path:'/my-account', element: <MyAccount />},
     { path:'/my-order', element: <MyOrder />},
     { path:'/my-orders', element: <MyOrders />},

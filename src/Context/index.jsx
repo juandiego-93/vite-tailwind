@@ -143,4 +143,4 @@ ContextProvider.propTypes = {
   };
 
 
-export default  ContextProvider
+export  {ContextProvider}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Context } from '../../Context/index';
 import { NavLink } from "react-router-dom";
-import { ShoppingCartIcon } from '@heroicons/react/24/solid'
+import ShoppingCart from '../ShoppingCart';
 
 function Navbar() {
     const context = React.useContext(Context)
@@ -25,12 +25,12 @@ function Navbar() {
         const stringifiedSignout = JSON.stringify(true)
         localStorage.setItem('sign-out', stringifiedSignout)
         context.setSignout(true)
-        localStorage.removeItem('account')
-        context.setAccount({})
+        // localStorage.removeItem('account')
+        // context.setAccount({})
     }
 
     function renderView() {
-        if (hasUserAnAccount && !isUserSignout) {
+        if (hasUserAnAccount && isUserSignout) {
             return (
                 <li>
                     <NavLink
@@ -62,12 +62,6 @@ function Navbar() {
                             to='/sign-in'
                             className={({ isActive }) => isActive ? activeStyle : undefined}
                             onClick={() => handleSignout()}>Sign Out</NavLink>
-                    </li>
-                    <li className='flex items-center justify-center'>
-                        <ShoppingCartIcon className='h-6 w-6 text-black' />
-                        <div>
-                            {context.cartProducts.length}
-                        </div>
                     </li>
                 </>
             )
@@ -121,6 +115,9 @@ function Navbar() {
             </ul>
             <ul className="flex items-center gap-3">
                 {renderView()}
+                <li className='flex items-center'>
+                    <ShoppingCart />
+                </li>
             </ul>
         </nav>
     )        
