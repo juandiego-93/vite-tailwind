@@ -6,9 +6,9 @@ import ProductDetail from '../../Components/ProductDetail'
 
 function Home() {
     const context = React.useContext(Context)
-console.log(context.SearchByTitle)
+// console.log(context.SearchByTitle)
     function renderView() {
-        if (context.SearchByTitle) {
+        if (context.SearchByTitle || context.searchByCategory) {
             if (context.filteredItems?.length > 0) {
                 return (
                     context.filteredItems?.map((item) => (

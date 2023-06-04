@@ -36,6 +36,9 @@ function ContextProvider({ children }) {
     // Get products by title
     const[SearchByTitle, setSearchByTitle] = React.useState(null) 
 
+    // Get products by category
+    const[searchByCategory, setSearchByCategory] = React.useState(null) 
+
     React.useEffect(() => {
         fetch('https://api.escuelajs.co/api/v1/products')
             .then(response => response.json())
@@ -43,13 +46,40 @@ function ContextProvider({ children }) {
             
     }, [])
 
-    function filteredItemsByTitle(items, searchByTitle) {
-        return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    function filteredItemsByTitle(items, SearchByTitle) {
+        return items?.filter(item => item.title.toLowerCase().includes(SearchByTitle.toLowerCase()))
     }
 
+    function filteredItemsByCategory(items, searchByCategory) {
+        return items?.filter(item => item.category?.name.toLowerCase().includes(searchByCategory.toLowerCase()))
+    }
+
+    function filterBy(searchType, items, SearchByTitle, searchByCategory) {
+        if (searchType === 'BY_TITLE') {
+            return filteredItemsByTitle(items, SearchByTitle)
+        }
+
+        if (searchType === 'BY_CATEGORY') {
+            return filteredItemsByCategory(items, searchByCategory)
+        }
+        if (searchType === 'BY_TITLE_AND_CATEGORY') {
+            return filteredItemsByCategory(items, searchByCategory).filter(item => item?.title.toLowerCase().includes(SearchByTitle.toLowerCase()))
+        }
+        if (!searchType) {
+            return items
+        }
+    }
+    console.log(SearchByTitle)
+    console.log(searchByCategory)
+    console.log(items?.map(item => item.category?.name))
+
     React.useEffect(() => { 
-        if (SearchByTitle) setFilteredItems(filteredItemsByTitle(items, SearchByTitle))
-    }, [items, SearchByTitle])
+        if (SearchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, SearchByTitle, searchByCategory))
+
+        if (!SearchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, SearchByTitle, searchByCategory))
+        if (!SearchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, SearchByTitle, searchByCategory))
+        if (SearchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, SearchByTitle, searchByCategory))
+    }, [items, SearchByTitle, searchByCategory])
 
     return (
         <Context.Provider value={{
@@ -72,6 +102,8 @@ function ContextProvider({ children }) {
             SearchByTitle,
             setSearchByTitle,
             filteredItems,
+            searchByCategory,
+            setSearchByCategory
 
         }}>
             {children}
