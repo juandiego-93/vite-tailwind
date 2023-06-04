@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Context = React.createContext()
+export const Context = React.createContext()
 
-function initializeLocalStorage() {
+export function initializeLocalStorage() {
     const accountInLocalStorage = localStorage.getItem('account')
     const signoutInLocalStorage = localStorage.getItem('sign-out')
     let parsedAccount
@@ -18,7 +18,7 @@ function initializeLocalStorage() {
 
     if (!signoutInLocalStorage) {
         localStorage.setItem('sign-out', JSON.stringify({}))
-        parsedSignOut = false
+        parsedSignout = false
     } else {
         parsedSignout = JSON.parse(signoutInLocalStorage)
     }
@@ -79,12 +79,13 @@ function ContextProvider({ children }) {
     function filteredItemsByCategory(items, searchByCategory) {
         return items?.filter(item => item.category?.name.toLowerCase().includes(searchByCategory.toLowerCase()))
     }
-
-    function filterBy(searchType, items, SearchByTitle, searchByCategory) {
+    
+    React.useEffect(() => { 
+    
+        function filterBy(searchType, items, SearchByTitle, searchByCategory) {
         if (searchType === 'BY_TITLE') {
             return filteredItemsByTitle(items, SearchByTitle)
         }
-
         if (searchType === 'BY_CATEGORY') {
             return filteredItemsByCategory(items, searchByCategory)
         }
@@ -96,7 +97,6 @@ function ContextProvider({ children }) {
         }
     }
 
-    React.useEffect(() => { 
         if (SearchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, SearchByTitle, searchByCategory))
         if (!SearchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, SearchByTitle, searchByCategory))
         if (!SearchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, SearchByTitle, searchByCategory))
@@ -142,5 +142,5 @@ ContextProvider.propTypes = {
     children: PropTypes.node.isRequired,
   };
 
-export { Context }
-export default (ContextProvider ,  initializeLocalStorage)
+
+export default  ContextProvider
