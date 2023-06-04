@@ -3,7 +3,33 @@ import PropTypes from 'prop-types'
 
 const Context = React.createContext()
 
+function initializeLocalStorage() {
+    const accountInLocalStorage = localStorage.getItem('account')
+    const signoutInLocalStorage = localStorage.getItem('sign-out')
+    let parsedAccount
+    let parsedSignout
+
+    if (!accountInLocalStorage) {
+        localStorage.setItem('account', JSON.stringify({}))
+        parsedAccount = {}
+    } else {
+        parsedAccount = JSON.parse(accountInLocalStorage)
+    }
+
+    if (!signoutInLocalStorage) {
+        localStorage.setItem('sign-out', JSON.stringify({}))
+        parsedSignOut = false
+    } else {
+        parsedSignout = JSON.parse(signoutInLocalStorage)
+    }
+}
+
 function ContextProvider({ children }) {
+    // My account
+    const [account, setAccount]= React.useState({})
+
+    // Sign Out
+    const [signout, setSignout] = React.useState(false)
 
     // ShoppingCart Increment quantity
     const [count, setCount] = React.useState(0)
@@ -72,7 +98,6 @@ function ContextProvider({ children }) {
 
     React.useEffect(() => { 
         if (SearchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, SearchByTitle, searchByCategory))
-
         if (!SearchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, SearchByTitle, searchByCategory))
         if (!SearchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, SearchByTitle, searchByCategory))
         if (SearchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, SearchByTitle, searchByCategory))
@@ -100,7 +125,11 @@ function ContextProvider({ children }) {
             setSearchByTitle,
             filteredItems,
             searchByCategory,
-            setSearchByCategory
+            setSearchByCategory,
+            account,
+            setAccount,
+            signout,
+            setSignout,
 
         }}>
             {children}
@@ -114,4 +143,4 @@ ContextProvider.propTypes = {
   };
 
 export { Context }
-export default ContextProvider
+export default (ContextProvider ,  initializeLocalStorage)

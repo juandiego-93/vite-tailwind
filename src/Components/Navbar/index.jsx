@@ -7,6 +7,12 @@ function Navbar() {
     const context = React.useContext(Context)
     const activeStyle = "underline underline-offset-4"
 
+    function handleSignout() {
+        const stringifiedSignout = JSON.stringify(true)
+        localStorage.setItem('sign-out', stringifiedSignout)
+        context.setSignout(true)
+    }
+
     return (
         <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white">
             <ul className="flex items-center gap-3">
@@ -98,10 +104,10 @@ function Navbar() {
                 <li>
                     <NavLink 
                         to='/sign-in'
-                        onClick={()=>context.setSearchByCategory()}
                         className={({ isActive }) => isActive ? activeStyle : undefined}
+                        onClick={()=>handleSignout()}
                     >
-                        Sign In
+                        Sign Out
                     </NavLink>
                 </li>
                 <li className='flex items-center justify-center'>
