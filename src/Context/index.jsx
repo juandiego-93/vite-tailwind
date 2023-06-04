@@ -69,9 +69,6 @@ function ContextProvider({ children }) {
             return items
         }
     }
-    console.log(SearchByTitle)
-    console.log(searchByCategory)
-    console.log(items?.map(item => item.category?.name))
 
     React.useEffect(() => { 
         if (SearchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, SearchByTitle, searchByCategory))
