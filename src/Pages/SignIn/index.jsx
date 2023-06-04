@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Context } from '../../Context'
 import Layout from '../../Components/Layout'
 
@@ -16,6 +16,14 @@ function SignIn() {
     const NoAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0: true
     const NoAccountInLocalState = context.account ? Object.keys(context.account).length === 0: true
     const hasUserAnAccount = !NoAccountInLocalStorage || !NoAccountInLocalState
+
+    function handleSingin() {
+        const stringifiedSignout = JSON.stringify(false)
+        localStorage.setItem('sign-out', stringifiedSignout)
+        context.setSignout(false)
+        // Redirect
+        return <Navigate replace to={'/'} />
+    }
     
     function createAnAccount() {
         const formData = new FormData(form.current)
@@ -27,7 +35,9 @@ function SignIn() {
         let stringifiedData = JSON.stringify(data)
         localStorage.setItem('account', stringifiedData)
         context.setAccount(data)
-        console.log(data)
+        // console.log(data)
+        // Sign in
+        handleSingin()
     }
 
 
@@ -47,6 +57,7 @@ function SignIn() {
                     to='/'>
                     <button
                         className='bg-green-500 disabled:bg-green-500/40 text-white w-full rounded-lg py-3 mt-4 mb-2'
+                        onClick={()=> handleSingin()}
                         disabled={!hasUserAnAccount}>
                         Log in
                     </button>

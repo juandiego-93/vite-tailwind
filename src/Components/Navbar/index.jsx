@@ -7,6 +7,9 @@ function Navbar() {
     const context = React.useContext(Context)
     const activeStyle = "underline underline-offset-4"
 
+    const account = localStorage.getItem('account')
+    const parsedAccount = JSON.parse(account)
+
     // Sign out
     const signout = localStorage.getItem('sign-out')
     const parsedSignout = JSON.parse(signout)
@@ -16,6 +19,8 @@ function Navbar() {
         const stringifiedSignout = JSON.stringify(true)
         localStorage.setItem('sign-out', stringifiedSignout)
         context.setSignout(true)
+        localStorage.removeItem('account')
+        context.setAccount({})
     }
 
     function renderView() {
@@ -32,7 +37,7 @@ function Navbar() {
             return (
                 <>
                     <li className="text-black/60">
-                        j.salvadorp@platzi.com
+                        {parsedAccount?.email}
                     </li>
                     <li>
                         <NavLink
