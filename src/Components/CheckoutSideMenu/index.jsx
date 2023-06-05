@@ -58,7 +58,7 @@ function CheckoutSideMenu() {
             <div className='px-6 mb-6'>
                 <p className='flex justify-between items-center mb-5'>
                     <span className='font-light'>Total:</span>
-                    <span className='font-medium text-2xl'>S/ {totalPrice(context.cartProducts)}</span>
+                    <span className='font-medium text-2xl'>S/.{totalPrice(context.cartProducts)}.00</span>
                 </p>
                 <Link to='/my-orders/last'>
                 <button 

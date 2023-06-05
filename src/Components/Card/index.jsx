@@ -66,9 +66,9 @@ function Card(data) {
                 {renderIcon(data.data?.id)}
 
             </figure>
-            <p className=" flex justify-between">
+            <p className=" flex justify-between items-center">
                 <span className="text-sm font-light">{data.data?.title} </span>
-                <span className="text-lg font-medium">S/ {data.data?.price}.00 </span>
+                <span className="text-md font-medium">S/.{data.data?.price}.00 </span>
             </p>
         </div>
 

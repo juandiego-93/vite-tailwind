@@ -13,7 +13,7 @@ function OrdersCard(props) {
                     <span>{totalProducts} articles</span>
                 </p>
                 <p className='flex items-center gap-2'>
-                    <span className='font-medium text-2xl'>S/ {totalPrice}.00</span>
+                    <span className='font-medium text-xl'>S/.{totalPrice}.00</span>
                     <ChevronRightIcon className='h-6 w-6 text-black cursor pointer' />
                 </p>
             </div>
