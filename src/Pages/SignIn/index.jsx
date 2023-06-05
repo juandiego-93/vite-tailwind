@@ -85,7 +85,7 @@ function SignIn() {
                         id='name'
                         name='name'
                         defaultValue={parsedAccount?.name}
-                        placeholder='Peter'
+                        placeholder='Juli'
                         className='rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4' />
                 </div>
                 <div className='flex flex-col gap-1'>
@@ -95,7 +95,7 @@ function SignIn() {
                         id='email'
                         name='email'
                         defaultValue={parsedAccount?.email}
-                        placeholder='peruanos@enelmundo.pe'
+                        placeholder='julimuñoz@mamasita.co'
                         className='rounded-lg border border-black placeholder:font-light placeholder:text-sm placeholder:text-black/60 focus:outline-none py-2 px-4' />
                 </div>
                 <div className='flex flex-col gap-1'>
